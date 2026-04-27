@@ -43,4 +43,21 @@ describe('local product workflow', () => {
     expect(brief.weekOf).toBe('2026-04-27');
     expect(brief.wins[0]).toContain('1 drafts approved');
   });
+
+  it('rejects draft creation for unknown campaign ids', async () => {
+    const campaignRepo = new InMemoryCampaignRepository();
+    const draftRepo = new InMemoryDraftRepository();
+    const campaignService = new CampaignService(campaignRepo, draftRepo);
+
+    await expect(
+      campaignService.createDraft({
+        campaignId: 'missing-campaign',
+        channel: 'linkedin',
+        destination: 'internal_queue',
+        contentType: 'post',
+        body: 'Should fail due to unknown campaign id.'
+      })
+    ).rejects.toThrow(/unknown campaign/i);
+  });
+
 });

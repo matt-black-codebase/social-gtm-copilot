@@ -30,6 +30,11 @@ export class CampaignService {
     body: string;
     ideaId?: string;
   }): Promise<ContentDraft> {
+    const campaign = await this.campaignRepo.getById(input.campaignId);
+    if (!campaign) {
+      throw new Error(`Cannot create draft for unknown campaign: ${input.campaignId}`);
+    }
+
     const now = new Date().toISOString();
     const draft = ContentDraftSchema.parse({
       id: randomUUID(),
