@@ -1,0 +1,24 @@
+{
+  "name": "social-gtm-copilot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first Social GTM Copilot product spine",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "cli": "node dist/src/cli/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
